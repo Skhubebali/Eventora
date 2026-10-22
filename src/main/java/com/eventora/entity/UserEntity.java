@@ -16,45 +16,49 @@ import java.util.UUID;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name="users")
+@Table(name = "users")
 public class UserEntity {
 
 
     @Id
-    @Column(name="userid" , unique = true,nullable = false)
+    @Column(name = "userid", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID userid;
 
-    @Column(name="username",nullable = false)
+    @Column(name = "username", nullable = false)
     @NotBlank
     private String username;
 
 
-    @Column(name="email",nullable = false,unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     @NotBlank
     @Email
     private String email;
 
-    @Column(name="password",nullable = false)
+    @Column(name = "password", nullable = false)
     @NotBlank
     private String password;
 
-    @Column(name="createdAt",nullable = false)
+    @Column(name = "createdAt", nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(name="updatedAt",nullable = false)
+    @Column(name = "updatedAt", nullable = false)
     private LocalDateTime updatedAt;
 
+    @Column(name = "user_role", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     @PrePersist
-    public void prePersist(){
+    public void prePersist() {
         LocalDateTime now = LocalDateTime.now();
-        createdAt =now;
+        createdAt = now;
         updatedAt = now;
 
     }
 
     @PreUpdate
-    public void preUpdate(){
+    public void preUpdate() {
         updatedAt = LocalDateTime.now();
     }
 

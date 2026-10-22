@@ -1,5 +1,6 @@
 package com.eventora.dto;
 
+import com.eventora.entity.Role;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -17,5 +18,7 @@ public class UserDto {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+    private Role role;
 
 }

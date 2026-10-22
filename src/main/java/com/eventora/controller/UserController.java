@@ -1,6 +1,7 @@
 package com.eventora.controller;
 
 import com.eventora.dto.*;
+import com.eventora.entity.Role;
 import com.eventora.entity.UserEntity;
 import com.eventora.mapper.UserMapper;
 import com.eventora.security.JwtService;
@@ -34,7 +35,9 @@ public class UserController {
     @PostMapping("create-user")
 
     public UserDto createUser(@Valid @RequestBody UserRequestDto userRequestDto) {
+
         UserEntity user = UserMapper.userRequestmapper(userRequestDto);
+        user.setRole(Role.USER);
         UserEntity savedUser = userv.save(user);
         UserDto dto = UserMapper.usermapper(savedUser);
         return dto;
