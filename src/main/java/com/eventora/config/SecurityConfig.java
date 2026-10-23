@@ -25,6 +25,7 @@ public class SecurityConfig {
     SecurityFilterChain auth(HttpSecurity httpSecurity) {
         return httpSecurity.authorizeHttpRequests(auth ->
                         auth.requestMatchers("/users/login", "/users/create-user").permitAll()
+                                .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/users/**").authenticated()
                                 .anyRequest().authenticated()).csrf(crsf -> crsf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

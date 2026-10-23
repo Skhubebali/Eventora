@@ -3,6 +3,7 @@ package com.eventora.mapper;
 import com.eventora.dto.UserDto;
 import com.eventora.dto.UserRequestDto;
 import com.eventora.dto.UserUpdateDto;
+import com.eventora.entity.Role;
 import com.eventora.entity.UserEntity;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,6 +23,7 @@ public class UserMapper {
         udto.setEmail(userEntity.getEmail());
         udto.setUpdatedAt(userEntity.getUpdatedAt());
         udto.setCreatedAt(userEntity.getCreatedAt());
+        udto.setRole(userEntity.getRole());
         return udto;
     }
 
@@ -31,6 +33,7 @@ public class UserMapper {
         udto.setPassword(userEntity.getPassword());
         udto.setEmail(userEntity.getEmail());
 
+
         return udto;
     }
 
@@ -39,7 +42,7 @@ public class UserMapper {
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
                 return List.of(
-                        new SimpleGrantedAuthority(entity.getRole().name())
+                        new SimpleGrantedAuthority("ROLE_" + entity.getRole().name())
                 );
             }
 
